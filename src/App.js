@@ -45,11 +45,23 @@ class App extends React.Component {
       zoom: 8
     });
 
+    var infowindow = new window.google.maps.InfoWindow();
+
     this.state.venues.map(venue => {
+
+      var contentString = `<h1>${venue.venue.name}</h1>`;
+
+      
+
       var marker = new window.google.maps.Marker({
         position: {lat: venue.venue.location.lat, lng: venue.venue.location.lng},
         map: map,
         title: venue.venue.name
+      });
+
+      marker.addListener('click', function() {
+        infowindow.setContent(contentString);
+        infowindow.open(map, marker);
       });
     })
   }
