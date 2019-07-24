@@ -42,3 +42,56 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+.menu {
+  background: rgb(0, 0, 0);
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: -360px;
+  width: 360px;
+  height: 100vh;
+  transition: 1s;
+}
+
+.open {
+  transition: 1s;
+  left: 0;
+}
+
+#hamburger-button {
+  z-index: 999;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#hamburger-button .open {
+  color: white;
+}
+
+.bar-hamburger-button1, .bar-hamburger-button2, .bar-hamburger-button3 {
+  width: 2em;
+  height: 0.3em;
+  background-color: rgb(51, 51, 51);
+  margin: 0.5em 0;
+  outline: none;
+  transition: 0.4s;
+}
+
+.open .bar-hamburger-button1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.open .bar-hamburger-button2 {opacity: 0;}
+
+.open .bar-hamburger-button3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
