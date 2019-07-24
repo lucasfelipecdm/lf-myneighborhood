@@ -1,37 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 
 #map {
   height: 100vh;
@@ -44,7 +18,7 @@ html, body {
 }
 
 .menu {
-  background: rgb(0, 0, 0);
+  background: rgb(78, 78, 78);
   position: absolute;
   margin: 0;
   top: 0;
@@ -62,7 +36,7 @@ html, body {
 #hamburger-button {
   z-index: 999;
   position: absolute;
-  margin: 0;
+  margin: 10px;
   top: 0;
   left: 0;
   background: transparent;
@@ -71,12 +45,8 @@ html, body {
   cursor: pointer;
 }
 
-#hamburger-button .open {
-  color: white;
-}
-
 .bar-hamburger-button1, .bar-hamburger-button2, .bar-hamburger-button3 {
-  width: 2em;
+  width: 2.2em;
   height: 0.3em;
   background-color: rgb(51, 51, 51);
   margin: 0.5em 0;
@@ -85,6 +55,7 @@ html, body {
 }
 
 .open .bar-hamburger-button1 {
+  background-color: white;
   -webkit-transform: rotate(-45deg) translate(-9px, 6px);
   transform: rotate(-45deg) translate(-9px, 6px);
 }
@@ -92,6 +63,38 @@ html, body {
 .open .bar-hamburger-button2 {opacity: 0;}
 
 .open .bar-hamburger-button3 {
+  background-color: white;
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
+}
+
+#search-div form {
+  padding: 0;
+  margin-top: 15%;
+}
+
+#search-div label {
+  display: block;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 0;
+  margin-top: 15%;
+}
+
+#search-div input {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  width: 80%;
+}
+
+#markers-list-div ol {
+  list-style: none;
+}
+
+#markers-list-div li {
+  color: white;
+  margin: 5px;
+  cursor: pointer;
 }
