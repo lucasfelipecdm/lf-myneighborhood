@@ -3,9 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-.App {
-  text-align: center;
-}
 
 #map {
   height: 100vh;
@@ -18,7 +15,7 @@ html, body {
 }
 
 .menu {
-  background: rgb(78, 78, 78);
+  background: rgba(78, 78, 78, 0.5);
   position: absolute;
   margin: 0;
   top: 0;
@@ -26,6 +23,7 @@ html, body {
   width: 360px;
   height: 100vh;
   transition: 1s;
+  text-align: center;
 }
 
 .open {
@@ -86,6 +84,7 @@ html, body {
   outline: none;
   border: none;
   border-radius: 10px;
+  height: 20px;
   width: 80%;
 }
 
@@ -94,7 +93,12 @@ html, body {
 }
 
 #markers-list-div li {
+  text-align: left;
   color: white;
   margin: 5px;
   cursor: pointer;
+}
+
+#markers-list-div li:hover {
+  background: rgba(78, 78, 78, 0.5);
 }

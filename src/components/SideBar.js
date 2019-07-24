@@ -3,9 +3,28 @@ import React from 'react';
 function SideBar(props) {
     const btnHamburguer = document.getElementById('hamburger-button');
     const sidebar = document.getElementById('sidebar');
+    const olMarkers = document.getElementsByTagName('ol');
+    while (olMarkers.firstChild) {
+        olMarkers.removeChild(olMarkers.firstChild);
+    }
+    console.log(olMarkers);
     const toggleClass = () => {
         sidebar.classList.contains('open') ? sidebar.classList.remove('open') : sidebar.classList.add('open');
         btnHamburguer.classList.contains('open') ? btnHamburguer.classList.remove('open') : btnHamburguer.classList.add('open');
+    }
+
+    const createInfoWindow = (marker) => {
+        var content = props.venues.map((venue) => {
+            if(venue.venue.name === marker){
+                var content = `<h1>${venue.venue.name}</h1>
+                <p>Address: ${venue.venue.location.address}</p>
+                <p>City: ${venue.venue.location.city}</p>
+                <p>Country: ${venue.venue.location.country}</p>
+                <p>Categoria: ${venue.venue.categories[0].name}</p>`
+            }
+            return content
+        })
+        return content.toString();
     }
 
     return (<menu>
@@ -23,9 +42,14 @@ function SideBar(props) {
             </div>
             <div id="markers-list-div">
                 <ol>
-                    {props.venues.map(venue => (
-                        <li key={venue.venue.id}>
-                            {venue.venue.name}
+                    {props.markers.map(marker => (
+                        <li onClick={(e) => {
+                                marker.setAnimation(window.google.maps.Animation.BOUNCE);
+                                var contentString = createInfoWindow(marker.title);
+                                props.infoWindow.setContent(contentString);
+                                props.infoWindow.open(props.map, marker)
+                            }} key={marker.title}>
+                            {marker.title}
                         </li>
                     ))}
                 </ol>
