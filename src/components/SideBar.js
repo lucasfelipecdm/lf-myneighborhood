@@ -12,14 +12,14 @@ function SideBar(props) {
     const createInfoWindow = (marker) => {
         var content = props.venues.map((venue) => {
             if(venue.venue.name === marker){
-                var content = `<h1 id="info-h1">${venue.venue.name}</h1>
-                <div id="info-div">
-                  <p><span>Address:</span> ${venue.venue.location.address}</p>
-                  <p><span>City:</span> ${venue.venue.location.city}</p>
-                  <p><span>Country:</span> ${venue.venue.location.country}</p>
-                  <p><span>Categoria:</span> ${venue.venue.categories[0].name}</p>
+                var content = `<h1 aria-label="${venue.venue.name}" id="info-h1">${venue.venue.name}</h1>
+                <div aria-label="Address information about ${venue.venue.name}" id="info-div">
+                  <p aria-label="Address"><span>Address:</span> ${venue.venue.location.address}</p>
+                  <p aria-label="City"><span>City:</span> ${venue.venue.location.city}</p>
+                  <p aria-label="Country"><span>Country:</span> ${venue.venue.location.country}</p>
+                  <p aria-label="Categoria"><span>Categoria:</span> ${venue.venue.categories[0].name}</p>
                 </div>
-                <div id="info-foursquare">
+                <div aria-label="Foursquare informations" id="info-foursquare">
                   <p>Info by <a href="https://pt.foursquare.com/"><span>Foursquare</span></a>
                 </div>`
             }
@@ -29,7 +29,7 @@ function SideBar(props) {
     }
 
     return (<menu>
-        <button tabindex="0" onClick={e => toggleClass()} id="hamburger-button">
+        <button tabIndex="0" onClick={e => toggleClass()} id="hamburger-button">
             <div className="bar-hamburger-button1"></div>
             <div className="bar-hamburger-button2"></div>
             <div className="bar-hamburger-button3"></div>
@@ -38,13 +38,13 @@ function SideBar(props) {
             <div id="search-div">
                 <form>
                     <label forhtml="filter">Filter:</label>
-                    <input type="search" id="filter" onChange={(e) => props.searchVenues(e.target.value)}></input>
+                    <input name="filter" type="search" id="filter" onChange={(e) => props.searchVenues(e.target.value)}></input>
                 </form>
             </div>
-            <div id="markers-list-div">
+            <div id="markers-list-div" aria-label="Recommendation list" role="application">
                 <ol>
                     {props.markers.map(marker => (
-                        <li tabindex='0' onClick={(e) => {
+                        <li aria-label={marker.title} tabIndex='0' onClick={(e) => {
                                 marker.setAnimation(window.google.maps.Animation.BOUNCE);
                                 var contentString = createInfoWindow(marker.title);
                                 props.infoWindow.setContent(contentString);

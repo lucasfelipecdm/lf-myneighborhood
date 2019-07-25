@@ -37,14 +37,11 @@ class App extends React.Component {
             this.renderMap();
             this.setState({
               firstRender: false
-            })
-          } else {
-            this.placeMarkers();
-          }
+            })}
         })
       })
       .catch(error => {
-        window.alert("Ops, we have a problem, here, please, verify your internet connection and reload the page")
+        window.alert("Ops, we have a problem here, please, verify your internet connection and try reload the page.");
       })
   }
 
@@ -91,14 +88,14 @@ class App extends React.Component {
   }
 
   createInfoWindow = (venue) => {
-    return `<h1 id="info-h1">${venue.venue.name}</h1>
-    <div id="info-div">
-      <p><span>Address:</span> ${venue.venue.location.address}</p>
-      <p><span>City:</span> ${venue.venue.location.city}</p>
-      <p><span>Country:</span> ${venue.venue.location.country}</p>
-      <p><span>Categoria:</span> ${venue.venue.categories[0].name}</p>
+    return `<h1 aria-label="${venue.venue.name}" id="info-h1">${venue.venue.name}</h1>
+    <div aria-label="Address information about ${venue.venue.name}" id="info-div">
+      <p aria-label="Address"><span>Address:</span> ${venue.venue.location.address}</p>
+      <p aria-label="City"><span>City:</span> ${venue.venue.location.city}</p>
+      <p aria-label="Country"><span>Country:</span> ${venue.venue.location.country}</p>
+      <p aria-label="Categoria"><span>Categoria:</span> ${venue.venue.categories[0].name}</p>
     </div>
-    <div id="info-foursquare">
+    <div aria-label="Foursquare informations" id="info-foursquare">
       <p>Info by <a href="https://pt.foursquare.com/"><span>Foursquare</span></a>
     </div>`
   }
@@ -135,7 +132,7 @@ class App extends React.Component {
     return (
       <main>
         <SideBar infoWindow={this.state.infoWindow} map={this.state.map} searchVenues={this.searchVenues} venues={this.state.initVenues} markers={this.state.markers}></SideBar>
-        <div tabindex='-1' id="map"></div>
+        <div tabIndex='-1' aria-label="Google Maps" id="map"></div>
       </main>
     )
   }
@@ -147,6 +144,10 @@ function loadScripts(url) {
   script.src = url
   script.defer = true
   script.async = true
+  script.onerror = (error) => {
+    console.log('aquiiioidsa'+error);
+    window.alert("Ops, we have a problem, here, please, verify your internet connection and reload the page");
+  };
   index.parentNode.insertBefore(script, index)
 }
 
