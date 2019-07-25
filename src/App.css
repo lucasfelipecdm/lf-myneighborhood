@@ -32,28 +32,45 @@ html, body {
 }
 
 #hamburger-button {
+  transition: 1s;
+  outline: none;
   z-index: 999;
   position: absolute;
   margin: 10px;
   top: 0;
   left: 0;
-  background: transparent;
+  background: rgb(0, 0, 0);
   border: none;
   display: inline-block;
   cursor: pointer;
+  -webkit-box-shadow:
+        0 2px 2px 0 rgba(0,0,0,0.14),
+        0 3px 1px -2px rgba(0,0,0,0.12),
+        0 1px 5px 0 rgba(0,0,0,0.2);
+  box-shadow: 
+        0 2px 2px 0 rgba(0,0,0,0.14),
+        0 3px 1px -2px rgba(0,0,0,0.12),
+        0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+#hamburger-button.open {
+  transition: 1s;
+  margin-left: 300px;
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .bar-hamburger-button1, .bar-hamburger-button2, .bar-hamburger-button3 {
   width: 2.2em;
   height: 0.3em;
-  background-color: rgb(51, 51, 51);
-  margin: 0.5em 0;
+  background-color: rgb(255, 255, 255);
+  margin: 0.5em;
   outline: none;
   transition: 0.4s;
 }
 
 .open .bar-hamburger-button1 {
-  background-color: white;
   -webkit-transform: rotate(-45deg) translate(-9px, 6px);
   transform: rotate(-45deg) translate(-9px, 6px);
 }
@@ -61,31 +78,50 @@ html, body {
 .open .bar-hamburger-button2 {opacity: 0;}
 
 .open .bar-hamburger-button3 {
-  background-color: white;
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
 #search-div form {
+  text-align: left;
   padding: 0;
   margin-top: 15%;
 }
 
 #search-div label {
-  display: block;
+  display: inline-block;
   color: white;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
-  padding: 0;
-  margin-top: 15%;
+  padding: 5px;
+  width: 20%;
 }
 
 #search-div input {
+  display: inline-block;
   outline: none;
   border: none;
   border-radius: 10px;
-  height: 20px;
-  width: 80%;
+  font-weight: bold;
+  height: 30px;
+  margin: 5%;
+  padding: 5px;
+  width: 70%;
+}
+
+#search-div input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+#search-div input:focus {
+  -webkit-box-shadow:
+        0 2px 2px 0 rgba(0,0,0,0.14),
+        0 3px 1px -2px rgba(0,0,0,0.12),
+        0 1px 5px 0 rgba(0,0,0,0.2);
+  box-shadow: 
+        0 2px 2px 0 rgba(0,0,0,0.14),
+        0 3px 1px -2px rgba(0,0,0,0.12),
+        0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
 #markers-list-div ol {
@@ -95,7 +131,7 @@ html, body {
 #markers-list-div li {
   text-align: left;
   color: white;
-  margin: 5px;
+  padding: 5px;
   cursor: pointer;
 }
 

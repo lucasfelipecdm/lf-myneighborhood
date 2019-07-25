@@ -3,11 +3,6 @@ import React from 'react';
 function SideBar(props) {
     const btnHamburguer = document.getElementById('hamburger-button');
     const sidebar = document.getElementById('sidebar');
-    const olMarkers = document.getElementsByTagName('ol');
-    while (olMarkers.firstChild) {
-        olMarkers.removeChild(olMarkers.firstChild);
-    }
-    console.log(olMarkers);
     const toggleClass = () => {
         sidebar.classList.contains('open') ? sidebar.classList.remove('open') : sidebar.classList.add('open');
         btnHamburguer.classList.contains('open') ? btnHamburguer.classList.remove('open') : btnHamburguer.classList.add('open');
@@ -36,8 +31,8 @@ function SideBar(props) {
         <div className="menu" id="sidebar">
             <div id="search-div">
                 <form>
-                    <label forhtml="search">Search:</label>
-                    <input type="search" id="search" onChange={(e) => props.searchVenues(e.target.value)}></input>
+                    <label forhtml="filter">Filter:</label>
+                    <input type="search" id="filter" onChange={(e) => props.searchVenues(e.target.value)}></input>
                 </form>
             </div>
             <div id="markers-list-div">

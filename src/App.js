@@ -6,7 +6,8 @@ import './App.css'
 class App extends React.Component {
 
   state = {
-    venues: [],
+    initVenues: [],
+    filterVenues: [],
     firstRender: true,
     map: '',
     markers: [],
@@ -14,22 +15,23 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.searchVenues('top');
+    this.initVenues();
   }
 
-  searchVenues = (query) => {
+  initVenues = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
     const parameters = {
       client_id: "VZRRHHM4G1UNL0NUAHDLAARKYKCYSQETWF3NCBP2H1RK5GT3",
       client_secret: "EX135RA5DWRQ14PUTX1MN2XI1S4YRMLCVMU5BANVIWWDOGZK",
-      query: query || 'top',
-      near: "Pouso Alegre MG",
+      query: 'top',
+      near: "Pouso Alegre",
+      limit: 10,
       v: "20190723"
     }
     axios.get(endPoint + new URLSearchParams(parameters))
       .then(response => {
         this.setState({
-          venues: response.data.response.groups[0].items
+          initVenues: response.data.response.groups[0].items
         }, () => {
           if (this.state.firstRender) {
             this.renderMap();
@@ -46,6 +48,19 @@ class App extends React.Component {
       })
   }
 
+  searchVenues = (query) => {
+    if(!query) {
+      this.placeMarkers(this.state.initVenues)
+    } else {
+      console.log(query)
+    const filterVenues = this.state.initVenues
+      .filter(venue => venue.venue.name.toLowerCase().includes(query));
+      this.setState({
+        filterVenues: filterVenues
+      }, () => this.placeMarkers(filterVenues))
+    }
+  }
+
 
   renderMap = () => {
     loadScripts("https://maps.googleapis.com/maps/api/js?key=AIzaSyBVGaI4iQj53OoM6-gWYfSKJgWtTEJUqq4&callback=initMap")
@@ -60,16 +75,16 @@ class App extends React.Component {
     });
     this.setState({
       map: map,
-    }, () => this.placeMarkers())
+    }, () => this.placeMarkers(this.state.initVenues))
   }
 
-  placeMarkers = () => {
+  placeMarkers = (venues) => {
     if (this.state.markers) {
       this.state.markers.forEach(marker => {
         marker.setMap(null);
       })
     }
-    const markers = this.createMarkers();
+    const markers = this.createMarkers(venues);
     this.setState({
       markers: markers,
     })
@@ -83,13 +98,13 @@ class App extends React.Component {
     <p>Categoria: ${venue.venue.categories[0].name}</p>`
   }
 
-  createMarkers = () => {
+  createMarkers = (venues) => {
     const that = this;
     const infowindow = new window.google.maps.InfoWindow();
     this.setState({
       infoWindow: infowindow,
     })
-    const markers = this.state.venues.map(venue => {
+    const markers = venues.map(venue => {
       var contentString = this.createInfoWindow(venue);
       var marker = new window.google.maps.Marker({
         position: { lat: venue.venue.location.lat, lng: venue.venue.location.lng },
@@ -115,16 +130,11 @@ class App extends React.Component {
     return (
       <main>
         <div id="map"></div>
-        <SideBar infoWindow={this.state.infoWindow} map={this.state.map} searchVenues={this.searchVenues} venues={this.state.venues} markers={this.state.markers}></SideBar>
+        <SideBar infoWindow={this.state.infoWindow} map={this.state.map} searchVenues={this.searchVenues} venues={this.state.initVenues} markers={this.state.markers}></SideBar>
       </main>
     )
   }
 }
-
-/* 
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-    async defer></script>
-*/
 
 function loadScripts(url) {
   var index = window.document.getElementsByTagName("script")[0]
