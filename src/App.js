@@ -44,7 +44,7 @@ class App extends React.Component {
         })
       })
       .catch(error => {
-        console.log(`Error: ${error}`)
+        window.alert("Ops, we have a problem, here, please, verify your internet connection and reload the page")
       })
   }
 
@@ -91,11 +91,16 @@ class App extends React.Component {
   }
 
   createInfoWindow = (venue) => {
-    return `<h1>${venue.venue.name}</h1>
-    <p>Address: ${venue.venue.location.address}</p>
-    <p>City: ${venue.venue.location.city}</p>
-    <p>Country: ${venue.venue.location.country}</p>
-    <p>Categoria: ${venue.venue.categories[0].name}</p>`
+    return `<h1 id="info-h1">${venue.venue.name}</h1>
+    <div id="info-div">
+      <p><span>Address:</span> ${venue.venue.location.address}</p>
+      <p><span>City:</span> ${venue.venue.location.city}</p>
+      <p><span>Country:</span> ${venue.venue.location.country}</p>
+      <p><span>Categoria:</span> ${venue.venue.categories[0].name}</p>
+    </div>
+    <div id="info-foursquare">
+      <p>Info by <a href="https://pt.foursquare.com/"><span>Foursquare</span></a>
+    </div>`
   }
 
   createMarkers = (venues) => {
@@ -129,8 +134,8 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <div id="map"></div>
         <SideBar infoWindow={this.state.infoWindow} map={this.state.map} searchVenues={this.searchVenues} venues={this.state.initVenues} markers={this.state.markers}></SideBar>
+        <div tabindex='-1' id="map"></div>
       </main>
     )
   }

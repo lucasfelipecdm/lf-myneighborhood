@@ -1,4 +1,5 @@
 import React from 'react';
+import '../App.css'
 
 function SideBar(props) {
     const btnHamburguer = document.getElementById('hamburger-button');
@@ -11,19 +12,24 @@ function SideBar(props) {
     const createInfoWindow = (marker) => {
         var content = props.venues.map((venue) => {
             if(venue.venue.name === marker){
-                var content = `<h1>${venue.venue.name}</h1>
-                <p>Address: ${venue.venue.location.address}</p>
-                <p>City: ${venue.venue.location.city}</p>
-                <p>Country: ${venue.venue.location.country}</p>
-                <p>Categoria: ${venue.venue.categories[0].name}</p>`
+                var content = `<h1 id="info-h1">${venue.venue.name}</h1>
+                <div id="info-div">
+                  <p><span>Address:</span> ${venue.venue.location.address}</p>
+                  <p><span>City:</span> ${venue.venue.location.city}</p>
+                  <p><span>Country:</span> ${venue.venue.location.country}</p>
+                  <p><span>Categoria:</span> ${venue.venue.categories[0].name}</p>
+                </div>
+                <div id="info-foursquare">
+                  <p>Info by <a href="https://pt.foursquare.com/"><span>Foursquare</span></a>
+                </div>`
             }
-            return content
+            return content;
         })
         return content.toString();
     }
 
     return (<menu>
-        <button onClick={e => toggleClass()} id="hamburger-button">
+        <button tabindex="0" onClick={e => toggleClass()} id="hamburger-button">
             <div className="bar-hamburger-button1"></div>
             <div className="bar-hamburger-button2"></div>
             <div className="bar-hamburger-button3"></div>
@@ -38,7 +44,7 @@ function SideBar(props) {
             <div id="markers-list-div">
                 <ol>
                     {props.markers.map(marker => (
-                        <li onClick={(e) => {
+                        <li tabindex='0' onClick={(e) => {
                                 marker.setAnimation(window.google.maps.Animation.BOUNCE);
                                 var contentString = createInfoWindow(marker.title);
                                 props.infoWindow.setContent(contentString);

@@ -15,6 +15,7 @@ html, body {
 }
 
 .menu {
+  z-index: 666;
   background: rgba(78, 78, 78, 0.5);
   position: absolute;
   margin: 0;
@@ -31,9 +32,30 @@ html, body {
   left: 0;
 }
 
+#info-h1 {
+  padding: 10px;
+}
+
+#info-div {
+  padding: 10px;
+}
+
+#info-div span {
+  color: grey;
+}
+
+#info-foursquare {
+  text-align: center;
+  font-size: 8px;
+  padding: 10px;
+}
+
+#info-foursquare a {
+  text-decoration: none;
+}
+
 #hamburger-button {
   transition: 1s;
-  outline: none;
   z-index: 999;
   position: absolute;
   margin: 10px;
@@ -51,6 +73,10 @@ html, body {
         0 2px 2px 0 rgba(0,0,0,0.14),
         0 3px 1px -2px rgba(0,0,0,0.12),
         0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+#hamburger-button:focus {
+  background: rgb(87, 85, 85);
 }
 
 #hamburger-button.open {
@@ -129,12 +155,17 @@ html, body {
 }
 
 #markers-list-div li {
+  outline: none;
   text-align: left;
   color: white;
   padding: 5px;
   cursor: pointer;
 }
 
-#markers-list-div li:hover {
+#markers-list-div li:hover:focus {
+  background: rgba(78, 78, 78, 0.5);
+}
+
+#markers-list-div li:focus {
   background: rgba(78, 78, 78, 0.5);
 }
