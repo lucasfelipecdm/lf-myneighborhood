@@ -21,8 +21,8 @@ class App extends React.Component {
   initVenues = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
     const parameters = {
-      client_id: "VZRRHHM4G1UNL0NUAHDLAARKYKCYSQETWF3NCBP2H1RK5GT3",
-      client_secret: "EX135RA5DWRQ14PUTX1MN2XI1S4YRMLCVMU5BANVIWWDOGZK",
+      client_id: "",
+      client_secret: "",
       query: 'top',
       near: "Pouso Alegre",
       limit: 10,
@@ -60,7 +60,7 @@ class App extends React.Component {
 
 
   renderMap = () => {
-    loadScripts("https://maps.googleapis.com/maps/api/js?key=AIzaSyBVGaI4iQj53OoM6-gWYfSKJgWtTEJUqq4&callback=initMap")
+    loadScripts("https://maps.googleapis.com/maps/api/js?keyAIzaSyBVGaI4iQj53OoM6-gWYfSKJgWtTEJUqq4&callback=initMap")
     window.initMap = this.initMap
   }
 
